@@ -1,0 +1,21 @@
+
+<%-include('header')%>
+
+        <h1>Welcome to BeautyCities!</h1>
+        
+        <h2>Cidades:</h2>
+        
+        <div>
+                <% cidades.rows.forEach( cidade => {%>
+
+                        <a href="cidade/<%-cidade.id%>" > <%-cidade.name%> </a> <br>
+
+
+                <%}) %>
+                
+                
+        </div>
+
+        
+
+<%-include('footer')%>

@@ -1,0 +1,104 @@
+<%-include('header')%>
+        
+        <h1><%-cidade.rows[0].name%></h1>
+        
+
+
+        <h2>Ruas:</h2>
+
+        <div>
+                <% ruas.rows.forEach( rua => {%>
+
+                        <%-rua.nome%> | 
+                        <%if(rua.tipo_pav == 1){%>
+                                Pavimentada<br>
+                        <%}else{%>
+                                Não pavimentada
+                        <%}%>
+                       
+
+
+                <%}) %>
+                
+                
+        </div>
+        
+        <div id="map"></div>
+
+        <script>
+          var map;
+          
+          var latt;
+          var lngg;
+          var points = []
+          
+          function defCentro(latt,lngg){
+             //this.locations = locations;   
+             this.latt = latt;
+             this.lngg = lngg;
+          }
+
+          function addCircle(latt, lngg, tipo_pavv){
+                elem = {lat: latt, lng: lngg, tipo_pav: tipo_pavv}
+                console.log(elem)
+                this.points.push(elem)
+
+          }
+          
+          function initMap() {
+              var loc = {lat: latt , lng: lngg};  
+              map = new google.maps.Map(document.getElementById('map'), {
+              center: loc,
+              zoom: 16
+            });
+            console.log(points)
+            
+            points.forEach(element => {
+                console.log('pontos for points:')
+                console.log(element)
+                var circle = new google.maps.Circle({
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#FF0000',
+                        fillOpacity: 0.35,
+                        map: map,
+                        center: {lat: element.lat, lng: element.lng},
+                        radius: 40
+                });
+
+                if(element.tipo_pav == 1){
+                        circle.strokeColor = '#0000FF';
+                        circle.fillColor = '#0000FF';
+                }
+                else if(element.tipo_pav == 2){
+                        circle.strokeColor = '#FFFF00';
+                        circle.fillColor = '#FFFF00';
+                }
+                else{
+                        circle.strokeColor = '#FF0000';
+                        circle.fillColor = '#FF0000';
+                }
+                      
+            });
+        }
+
+            
+          
+
+          
+
+          
+        </script>
+        
+       
+        <script type ='text/javascript'>defCentro(<%-locations.rows[0].lat%>, <%-locations.rows[0].lng%> )</script>
+        
+        <%locations.rows.forEach(elem => {%>
+                <script type ='text/javascript'>addCircle(<%-elem.lat%>, <%-elem.lng%>, <%-elem.tipo_pav%> )</script>
+        <%})%>
+
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjD-YSvRmeDNsda45Ph0iTzO38RAB7Pjk&callback=initMap"
+        async defer></script>
+
+<%-include('footer')%>
