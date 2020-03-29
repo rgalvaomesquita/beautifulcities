@@ -66,6 +66,7 @@ app.get('/cidade/:id',async(request,response) => {
     const cidade = await pool.query(`select name from cidades where id = $1::integer`, [request.params.id])
     
     const locations = await pool.query(`select * from locations where id_cidade = $1::integer`, [request.params.id])
+    
     response.render('cidade', {cidade,ruas,locations})
     
 // await client.end()

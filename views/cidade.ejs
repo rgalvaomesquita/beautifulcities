@@ -33,14 +33,13 @@
           var points = []
           
           function defCentro(latt,lngg){
-             //this.locations = locations;   
+              
              this.latt = latt;
              this.lngg = lngg;
           }
 
           function addCircle(latt, lngg, tipo_pavv){
                 elem = {lat: latt, lng: lngg, tipo_pav: tipo_pavv}
-                console.log(elem)
                 this.points.push(elem)
 
           }
@@ -51,11 +50,10 @@
               center: loc,
               zoom: 16
             });
-            console.log(points)
+            
             
             points.forEach(element => {
-                console.log('pontos for points:')
-                console.log(element)
+               
                 var circle = new google.maps.Circle({
                         strokeOpacity: 0.8,
                         strokeWeight: 2,
@@ -97,8 +95,8 @@
                 <script type ='text/javascript'>addCircle(<%-elem.lat%>, <%-elem.lng%>, <%-elem.tipo_pav%> )</script>
         <%})%>
 
-        
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjD-YSvRmeDNsda45Ph0iTzO38RAB7Pjk&callback=initMap"
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCimjCS4dSenUZPXTKHlGZPKEWWZtheewk&callback=initMap"
         async defer></script>
 
 <%-include('footer')%>
