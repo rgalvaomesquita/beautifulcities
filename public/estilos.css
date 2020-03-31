@@ -7,6 +7,26 @@ p{
 }
 
 #map{
-    height: 600px;
+    height: 500px;
 }
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 400px;
+    overflow: auto;
+    }
+.table-wrapper-scroll-y {
+    display: block;
+    }
+
+    .tableFixHead          { overflow-y: auto; height: 400px; }
+    .tableFixHead thead th { position: sticky; top: 0; }
+    
+    /* Just common table stuff. Really. */
+    table  { border-collapse: collapse; width: 100%; }
+    th, td { padding: 8px 16px; }
+    th     { background:#eee; }
+    
+
+
 

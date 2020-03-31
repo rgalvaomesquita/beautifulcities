@@ -4,27 +4,55 @@
         
         <%-include('map')%>
 
-        <h2>Ruas:</h2>
+        
 
-        <div>
-                <% ruas.rows.forEach( rua => {%>
+        <br><br>
+     
 
-                        <%-rua.nome%> | 
-                        <%if(rua.tipo_pav == 1 || rua.tipo_pav == 2){%>
-                                Pavimentada<br>
-                        <%}else{%>
-                                Não pavimentada<br>
-                        <%}%>
-                       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar tableFixHead">
+               
+                <table class="table table-striped">
+                <thead>
+                        <tr>
+                        <th class="th-sm">Rua
 
+                        </th>
+                        <th class="th-sm">Tipo da pavimentação
 
-                <%}) %>
-                
-                
+                        </th>
+                        
+                        </tr>
+                </thead>
+                <tbody>
+                        <% ruas.rows.forEach( rua => {%>
+                        <tr>
+                                <td> <%-rua.nome%> </td> 
+                                <td>
+                                <%if(rua.tipo_pav == 1 || rua.tipo_pav == 2){%>
+                                        Pavimentada<br>
+                                <%}else{%>
+                                        Não pavimentada<br>
+                                <%}%>
+                                </td>
+                        </tr>
+
+                        <%}) %>
+                        
+                        <tfoot>
+                        <tr>
+                                <th>Rua
+                                </th>
+                                <th>Tipo da pavimentação
+                                </th>
+                                
+                        </tr>
+                        </tfoot>
+                </table>
         </div>
         
         
-
         
+     
        
 <%-include('footer')%>
