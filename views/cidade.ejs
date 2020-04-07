@@ -15,10 +15,10 @@
                 <table class="table table-striped">
                 <thead>
                         <tr>
-                        <th class="th-sm">Rua
+                        <th class="th-sm">Street name
 
                         </th>
-                        <th class="th-sm">Tipo da pavimentação
+                        <th class="th-sm">Paving type
 
                         </th>
                         
@@ -30,24 +30,16 @@
                                 <td> <%-rua.nome%> </td> 
                                 <td>
                                 <%if(rua.tipo_pav == 1 || rua.tipo_pav == 2){%>
-                                        Pavimentada<br>
+                                        Paved<br>
                                 <%}else{%>
-                                        Não pavimentada<br>
+                                        Unpaved<br>
                                 <%}%>
                                 </td>
                         </tr>
 
                         <%}) %>
                         
-                        <tfoot>
-                        <tr>
-                                <th>Rua
-                                </th>
-                                <th>Tipo da pavimentação
-                                </th>
-                                
-                        </tr>
-                        </tfoot>
+                        
                 </table>
         </div>
         
