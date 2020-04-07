@@ -1,35 +1,38 @@
 <div id="map"></div>
 
 <script>
-    var map;
+    let map = undefined;
     
-    var latt;
-    var lngg;
-    var points = []
+    let latt;
+    let lngg;
+    let points = []
     
-    function defCentro(latt,lngg){
+    function defCentro(latitude,longitude){
         
-       this.latt = latt;
-       this.lngg = lngg;
+       latt = latitude;
+       lngg = longitude;
     }
 
     function addCircle(latt, lngg, tipo_pavv){
           elem = {lat: latt, lng: lngg, tipo_pav: tipo_pavv}
-          this.points.push(elem)
+          points.push(elem)
 
     }
     
+    
+
     function initMap() {
-        var loc = {lat: latt , lng: lngg};  
+        let loc = {lat: latt , lng: lngg};  
         map = new google.maps.Map(document.getElementById('map'), {
         center: loc,
         zoom: 16
       });
       
+         
       
       points.forEach(element => {
          
-          var circle = new google.maps.Circle({
+          let circle = new google.maps.Circle({
                   strokeOpacity: 0.8,
                   strokeWeight: 0,
                   fillColor: '#FF0000',
@@ -39,20 +42,21 @@
                   radius: 40
           });
 
-          if(element.tipo_pav == 1){
+          if(element.tipo_pav == 1 || element.tipo_pav == 2){
                   circle.strokeColor = '#0000FF';
                   circle.fillColor = '#0000FF';
           }
-          else if(element.tipo_pav == 2){
+          /*else if(element.tipo_pav == 2){
                   circle.strokeColor = '#00FF00';
                   circle.fillColor = '#00FF00';
-          }
+          }*/
           else{
                   circle.strokeColor = '#FF0000';
                   circle.fillColor = '#FF0000';
           }
                 
       });
+      
   }
 
       
@@ -73,3 +77,6 @@
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCimjCS4dSenUZPXTKHlGZPKEWWZtheewk&callback=initMap"
   async defer></script>
+
+  
+  
