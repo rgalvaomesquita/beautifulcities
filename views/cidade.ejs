@@ -4,6 +4,7 @@
         
         <div id="piechart"></div>
         
+        <h2>Map with classifications for each <u>location:</u></h2>
         <%-include('map')%>
 
         
@@ -45,6 +46,7 @@
         </script>
         <script type ='text/javascript'>param(<%- num_ruas_pav.rows[0].count %>, <%-num_ruas_sto.rows[0].count%>, <%- num_ruas_unp.rows[0].count  %> )</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <h2>Classification for each <u>street</u>, considering all of its locations:</h2>
         <div class="table-wrapper-scroll-y my-custom-scrollbar tableFixHead">
                
                 <table class="table table-striped">
