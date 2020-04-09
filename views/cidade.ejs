@@ -2,13 +2,48 @@
         
         <h1><%-cidade.rows[0].name%></h1>
         
+        <div id="piechart"></div>
+        
         <%-include('map')%>
 
         
 
         <br><br>
-     
+        
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        
+        <script type="text/javascript">
 
+                let pav;
+                let unp;
+                function param(paved,stone,unpaved){
+                        console.log(paved+stone)
+                        console.log(unpaved)
+                        pav = paved+stone;
+                        unp = unpaved;
+                }
+
+                // Load google charts
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+                
+                // Draw the chart and set the chart values
+                function drawChart() {
+                  var data = google.visualization.arrayToDataTable([
+                  ['Paving type', 'number of streets'],
+                  ['Paved', pav],
+                  ['Unpaved', unp]
+                ]);
+                
+                  // Optional; add a title and set the width and height of the chart
+                  var options = {'title':'Proportion of paving types per street', 'width':550, 'height':400};
+                
+                  // Display the chart inside the <div> element with id="piechart"
+                  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                  chart.draw(data, options);
+                }
+        </script>
+        <script type ='text/javascript'>param(<%- num_ruas_pav.rows[0].count %>, <%-num_ruas_sto.rows[0].count%>, <%- num_ruas_unp.rows[0].count  %> )</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <div class="table-wrapper-scroll-y my-custom-scrollbar tableFixHead">
                
