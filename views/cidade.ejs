@@ -2,7 +2,25 @@
         
         <h1><%-cidade.rows[0].name%></h1>
         
-        <div id="piechart"></div>
+
+        <div id="wrapper">
+                <div class="left">
+                        <br><br>
+                        <ul>
+                                <li>This page shows paving types for the city of <%-cidade.rows[0].name%>. The map below shows 
+                                classifications results for each location used in our test dataset. It is possible to navigate using 
+                                Google Street View tool to see each location used in our dataset
+                                <li>The table below the map shows the classification results for each street, considering all of its 
+                                locations in our dataset. Note that some locations within the same street may have different paving types
+                                <li>This page also shows the statistics of paved and unpaved streets for the city of <%-cidade.rows[0].name%>
+                        </ul>
+                </div>
+                <div class = "right" id="piechart"></div>
+              </div>
+        
+       
+
+        
         
         <h2>Map with classifications for each <u>location:</u></h2>
         <%-include('map')%>
@@ -37,7 +55,7 @@
                 ]);
                 
                   // Optional; add a title and set the width and height of the chart
-                  var options = {'title':'Proportion of paving types per street', 'width':550, 'height':400};
+                  var options = {'title':'Proportion of paving types per street', 'width':550, 'height':300};
                 
                   // Display the chart inside the <div> element with id="piechart"
                   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
