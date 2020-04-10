@@ -26,6 +26,18 @@ p{
     table  { border-collapse: collapse; width: 100%; }
     th, td { padding: 8px 16px; }
     th     { background:#eee; }
+
+    #wrapper {
+        display: flex;
+      }
+      
+      .left {
+        flex: 0 0 50%;
+      }
+      
+      .right {
+        flex: 1;
+      }
     
 
 
