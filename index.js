@@ -2,48 +2,31 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
 const path = require('path')
+const fs = require('fs');
 
+let rawdata = fs.readFileSync('secure_data.json');
+let data = JSON.parse(rawdata);
 
+const { Client } = require('pg');
 
-
-/*var pg = require('pg')
-
-const config = {
-  user: "ejnktmfophwmce",
-  password: "c0b0605fb928c58dfd4c41ff54b9ca11e97904c410ac08a02c18e1e04c5da6a2",
-  database: "d1kktm0euitb3a",
-  port: 5432,
-  host: "ec2-3-91-112-166.compute-1.amazonaws.com",
-  ssl: true
-};
-var pool = new pg.Pool(config)*/
 /*
-const { Client } = require('pg');
-
 const client = new Client({
-  user: "ejnktmfophwmce",
-  password: "c0b0605fb928c58dfd4c41ff54b9ca11e97904c410ac08a02c18e1e04c5da6a2",
-  database: "d1kktm0euitb3a",
-  port: 5432,
-  host: "ec2-3-91-112-166.compute-1.amazonaws.com",
-  ssl: true
+  user: data.bd_heroku.user,
+  password: data.bd_heroku.password,
+  database: data.bd_heroku.database,
+  port: data.bd_heroku.port,
+  host: data.bd_heroku.host,
+  ssl: data.bd_heroku.ssl
 });
-
-client.connect();
 */
-
-
-const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
 
+
 client.connect();
-
-
-
 
 
 
@@ -92,9 +75,7 @@ app.get('/cidade/:id',async(request,response) => {
     const num_ruas_sto = await client.query(`select count(id) from ruas where tipo_pav = 2 and fk_cidade_id = $1::integer`, [request.params.id])
   
     const num_ruas_unp = await client.query(`select count(id) from ruas where tipo_pav = 3 and fk_cidade_id = $1::integer`, [request.params.id])
-    console.log(num_ruas_pav)
-    console.log(num_ruas_sto)
-    console.log(num_ruas_unp)
+  
     response.render('cidade', {cidade,ruas,locations, num_ruas_pav, num_ruas_sto, num_ruas_unp })
     
 // await client.end()
