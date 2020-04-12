@@ -4,26 +4,35 @@ const port = process.env.PORT || 3000
 const path = require('path')
 const fs = require('fs');
 
-let rawdata = fs.readFileSync('secure_data.json');
-let data = JSON.parse(rawdata);
+
 
 const { Client } = require('pg');
+let client;
+try {
+  if (fs.existsSync('secure_data.json')) {
+    let rawdata = fs.readFileSync('secure_data.json');
+    let data = JSON.parse(rawdata);
+    client = new Client({
+      user: data.bd_heroku.user,
+      password: data.bd_heroku.password,
+      database: data.bd_heroku.database,
+      port: data.bd_heroku.port,
+      host: data.bd_heroku.host,
+      ssl: data.bd_heroku.ssl
+    });
+  }
+  else{
+    client = new Client({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
+  }
+} catch(err) {
+  console.error(err)
+}
 
-/*
-const client = new Client({
-  user: data.bd_heroku.user,
-  password: data.bd_heroku.password,
-  database: data.bd_heroku.database,
-  port: data.bd_heroku.port,
-  host: data.bd_heroku.host,
-  ssl: data.bd_heroku.ssl
-});
-*/
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
+
 
 
 client.connect();
