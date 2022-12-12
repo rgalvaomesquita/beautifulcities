@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "google-maps": "^4.2.3",
     "mysql": "^2.18.1",
     "pg": "^7.18.2",
